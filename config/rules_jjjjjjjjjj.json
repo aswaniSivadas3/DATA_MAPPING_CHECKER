@@ -1,0 +1,67 @@
+{
+  "Record Type": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Member code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Technical customer code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Functional customer code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Seller's entity": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "National Identification code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Customer name": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Country code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Language Code": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Payment method": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Currency": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 3
+  },
+  "Eligible for default interests": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  },
+  "Order status Date": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 50
+  }
+}

@@ -1,0 +1,119 @@
+{
+  "Currency": {
+    "type": "string",
+    "mandatory": true,
+    "max_length": 3
+  },
+  "Amount":{
+        "type":"float",
+        "mandatory":true
+    },
+  "MemberCode": {
+      "type": "number",
+      "length": 6,
+      "mandatory": true,
+      "nature": "N",
+      "erpTable": "SideTrade",
+      "notes": "302??? Attributed by Sidetrade Parameters"
+    },
+  "TechnicalCustomerCode": {
+      "type": "string",
+      "length": 64,
+      "mandatory": true,
+      "nature": "AN",
+      "notes": "Code used as primary key in STN Code CLI : Code CPA : CPA-E345-1700142457"
+    },
+  "FunctionalCustomerCode": {
+      "type": "string",
+      "length": 20,
+      "mandatory": false,
+      "nature": "AN",
+      "notes": "Code that is showed on the screen and on the dunning letters."
+    },
+  "SellerEntity": {
+      "type": "number",
+      "length": 20,
+      "mandatory": true,
+      "nature": "N",
+      "notes": "CPA-E345-1700142457 After CPA"
+    },
+  "NationalIdentificationCode": {
+      "type": "number",
+      "length": 50,
+      "mandatory": false,
+      "nature": "N",
+      "notes": "It is the legal identifier of the customer in its country. A prefix of the identifier type has to be sent before the identifier. Example: SIREN=123456789 CRO=07742637 TVABE=BE1245683388"
+    },
+  "CustomerName": {
+      "type": "string",
+      "length": 24,
+      "mandatory": true,
+      "nature": "AN"
+    },
+    "CountryCode": {
+      "type": "string",
+      "length": 2,
+      "mandatory": true,
+      "nature": "AN",
+      "notes": "ISO-3166 on 2 digits"
+    },
+  "LanguageCode": {
+      "type": "string",
+      "length": 2,
+      "mandatory": false,
+      "nature": "AN",
+      "notes": "ISO-639"
+    },
+    "PaymentMethod": {
+      "type": "string",
+      "length": 3,
+      "mandatory": true,
+      "nature": "AN",
+      "notes": "SideTrade payment method table (fig. 1) - Use NDE as a default",
+      "validValues": [
+        "AAE",
+        "ADM",
+        "ASE",
+        "BVR",
+        "CB",
+        "CDO",
+        "CHQ",
+        "CIG",
+        "COD",
+        "EFF",
+        "ESP",
+        "LCA",
+        "LCD",
+        "LCM",
+        "LCN",
+        "MAD",
+        "NDE",
+        "PAG",
+        "PRE",
+        "RBA",
+        "RBO",
+        "RDO",
+        "SDD",
+        "VCO",
+        "VDR",
+        "VIR"
+      ]
+    },
+  
+  "EligibleForDefaultInterests": {
+      "type": "number",
+      "length": 1,
+      "mandatory": false,
+      "nature": "N",
+      "notes": "Empty or 1 => yes 0 => No Interest indicator field"
+    },
+  "OrderStatusDate": {
+      "type": "string",
+      "length": 10,
+      "mandatory": true,
+      "nature": "AN",
+      "notes": "Format YYYYMMDD"
+    }
+  
+  
+}

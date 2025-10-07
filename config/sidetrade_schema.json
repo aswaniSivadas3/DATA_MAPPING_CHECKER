@@ -1,0 +1,7 @@
+{
+  "InvoiceNumber": "string",
+  "InvoiceDate": "date",
+  "Amount": "number",
+  "Currency": "string",
+  "BuyerCode": "string"
+}
