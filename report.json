@@ -1,17 +1,4 @@
 {
-  "column_comparison": {
-    "type_errors": [
-      {
-        "column": "National Identification code",
-        "row": 17,
-        "value": "hgshc"
-      },
-      {
-        "column": "National Identification code",
-        "row": 18,
-        "value": "fdgjkf"
-      }
-    ]
-  },
-  "is_standard": false
+  "column_comparison": {},
+  "is_standard": true
 }

@@ -12,8 +12,7 @@
   "Technical customer code": {
     "type": "string",
     "mandatory": true,
-    "max_length": 64,
-    "derived_rule": "Member Code + \"-\" + Seller Entity"
+    "max_length": 64
   },
   "Functional customer code": {
     "type": "string",
@@ -33,7 +32,7 @@
   "Customer name": {
     "type": "string",
     "mandatory": true,
-    "max_length": 24
+    "max_length": 100
   },
   "Country code": {
     "type": "string",

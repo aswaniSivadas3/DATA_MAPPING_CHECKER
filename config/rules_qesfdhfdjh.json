@@ -13,7 +13,7 @@
     "type": "string",
     "mandatory": true,
     "max_length": 64,
-    "derived_rule": "Member Code + \"-\" + Seller Entity"
+    "derived_rule": "Member Code + '-'+ Seller Entity"
   },
   "Functional customer code": {
     "type": "string",

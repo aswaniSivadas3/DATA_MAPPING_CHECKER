@@ -1,0 +1,5 @@
+{
+  "username": "STN_TEST1_DBA",
+  "password": "sidetrade",
+  "dsn": "192.168.31.115:1521/ORCPRV08"
+}
