@@ -1,209 +1,211 @@
 {
-  "recordtype": {
+  "RecordType": {
     "type": "string",
     "mandatory": true,
     "max_length": 10
   },
-  "membercode": {
+  "MemberCode": {
     "type": "string",
     "mandatory": true,
     "max_length": 6
   },
-  "technicalcustomercode": {
+  "TechnicalCustomerCode": {
     "type": "string",
     "mandatory": true,
     "max_length": 64
   },
-  "functionalcustomercode": {
+  "FunctionalCustomerCode": {
     "type": "string",
     "mandatory": false,
-    "max_length": 20
+    "max_length": 20,
+    "derived": "TechnicalCustomerCode+'-'+MemberCode"
   },
-  "sellersentity": {
+  "Sellers Entity": {
     "type": "string",
     "mandatory": true,
     "max_length": 20
   },
-  "nationalidentificationcode": {
+  "National Identification code": {
     "type": "string",
     "mandatory": false,
     "max_length": 50
   },
-  "customername": {
+  "CustomerName": {
     "type": "string",
     "mandatory": true,
     "max_length": 240
   },
-  "commercialtrademarkifany": {
+  "Commercial trade mark if any": {
     "type": "string",
     "mandatory": false,
     "max_length": 40
   },
-  "address1": {
+  "Address1": {
     "type": "string",
     "mandatory": true,
     "max_length": 40
   },
-  "address2": {
+  "Address2": {
     "type": "string",
     "mandatory": false,
     "max_length": 40
   },
-  "address3": {
+  "Address3": {
     "type": "string",
     "mandatory": false,
     "max_length": 40
   },
-  "zipcode": {
+  "Zip Code": {
     "type": "string",
     "mandatory": true,
     "max_length": 10
   },
-  "city": {
+  "City": {
     "type": "string",
     "mandatory": true,
     "max_length": 40
   },
-  "countrycode": {
+  "CountryCode": {
     "type": "string",
     "mandatory": true,
     "max_length": 2
   },
-  "telephone": {
+  "Telephone": {
     "type": "string",
     "mandatory": false,
     "max_length": 20
   },
-  "fax": {
+  "Fax": {
     "type": "string",
     "mandatory": false,
     "max_length": 20
   },
-  "europeanactivitycode": {
+  "European activity code": {
     "type": "string",
     "mandatory": false,
     "max_length": 6
   },
-  "languagecode": {
+  "Language code": {
     "type": "string",
     "mandatory": false,
     "max_length": 2
   },
-  "paymentmethod": {
+  "PaymentMethod": {
     "type": "string",
     "mandatory": true,
     "max_length": 3
   },
-  "delaygrantedpaymentterms": {
+  "Delay granted (Payment Terms)": {
     "type": "string",
-    "mandatory": false,
-    "max_length": 3
+    "mandatory": true,
+    "max_length": 50
   },
-  "endofmonthpaymentterms": {
+  "End of month (Payment Terms)": {
     "type": "string",
-    "mandatory": false,
-    "max_length": 2
+    "mandatory": true,
+    "max_length": 50
   },
-  "currency": {
+  "Currency": {
     "type": "string",
     "mandatory": true,
     "max_length": 3
   },
-  "assignmentcode1": {
+  "Assignment Code 1": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode2": {
+  "Assignment Code 2": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode3": {
+  "Assignment Code 3": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode4": {
+  "Assignment Code 4": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode5": {
+  "Assignment Code 5": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode6": {
+  "Assignment Code 6": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode7": {
+  "Assignment Code 7": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode8": {
+  "Assignment Code 8": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode9": {
+  "Assignment Code 9": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "assignmentcode10": {
+  "Assignment Code 10": {
     "type": "string",
     "mandatory": false,
     "max_length": 100
   },
-  "numberofitemsnotyetinvoiced": {
+  "Number of items not yet invoiced": {
     "type": "float",
     "mandatory": false,
     "max_length": 15
   },
-  "amountofitemsnotyetinvoiced": {
+  "Amount of items not yet invoiced": {
     "type": "float",
     "mandatory": false,
     "max_length": 15
   },
-  "orderstatus": {
+  "Order Status": {
     "type": "string",
     "mandatory": false,
     "max_length": 1
   },
-  "orderstatuscomment": {
+  "Order status comment": {
     "type": "string",
     "mandatory": false,
     "max_length": 40
   },
-  "orderstatusdate": {
-     "type": "date",
-    "mandatory": false
+  "Order status date": {
+    "type": "date",
+    "mandatory": false,
+    "format": "%Y%m%d"
   },
-  "eligiblefordefaultinterests": {
+  "Eligible for default interests": {
     "type": "string",
     "mandatory": false,
     "max_length": 1
   },
-  "nonb2bcustomer": {
+  "Non B2B customer?": {
     "type": "string",
     "mandatory": false,
-    "max_length": 1
+    "max_length": 50
   },
-  "linkedcompany": {
+  "Linked company?": {
     "type": "string",
     "mandatory": false,
-    "max_length": 1
+    "max_length": 50
   },
-  "localcurrencycode": {
+  "Local currency code": {
     "type": "string",
-    "mandatory": false,
+    "mandatory": true,
     "max_length": 3
   },
-  "invoicesnotyetissuedamountinlocalcurrency": {
+  "Invoices not yet issued amount in local currency": {
     "type": "float",
     "mandatory": false,
     "max_length": 15
