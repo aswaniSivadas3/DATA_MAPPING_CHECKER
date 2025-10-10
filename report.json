@@ -1,4 +1,39 @@
 {
-  "column_comparison": {},
-  "is_standard": true
+  "column_comparison": {
+    "missing_columns": [
+      "Delay granted (Payment Terms)",
+      "End of month (Payment Terms)",
+      "Non B2B customer?",
+      "Linked company?"
+    ],
+    "extra_columns": [
+      "delaygrantedpaymentterms",
+      "endofmonthpaymentterms",
+      "nonb2bcustomer",
+      "linkedcompany"
+    ],
+    "mandatory_errors": [
+      {
+        "column": "Local currency code",
+        "row": 1,
+        "value": ""
+      },
+      {
+        "column": "Local currency code",
+        "row": 2,
+        "value": ""
+      },
+      {
+        "column": "Local currency code",
+        "row": 3,
+        "value": ""
+      },
+      {
+        "column": "Local currency code",
+        "row": 4,
+        "value": ""
+      }
+    ]
+  },
+  "is_standard": false
 }

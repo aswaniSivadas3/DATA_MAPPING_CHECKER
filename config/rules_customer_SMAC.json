@@ -17,8 +17,7 @@
   "FunctionalCustomerCode": {
     "type": "string",
     "mandatory": false,
-    "max_length": 20,
-    "derived": "MemberCode+'-'+TechnicalCustomerCode"
+    "max_length": 20
   },
   "Sellers Entity": {
     "type": "string",

@@ -1,5 +1,7 @@
 import copy
 import streamlit as st
+import xml.etree.ElementTree as ET
+from io import BytesIO
 from utils.file_io import load_json, save_json, read_csv
 from utils.rules import init_rules, prepare_rules_df, df_to_rules_dict
 from utils.validation import validate_file
@@ -23,11 +25,45 @@ def run_checker_ui():
         "Select File Category",
         options=["Customer", "Item", "Contacts", "Users"]
     )
-    uploaded_file = st.file_uploader("Upload standard CSV file (.csv)", type=["csv"])
+    #uploaded_file = st.file_uploader("Upload standard CSV file (.csv)", type=["csv"])
+    uploaded_file_category = st.selectbox(
+        "Select File type",
+        options=["csv","json","txt","xml"]
+    )
+
+ 
+    if uploaded_file_category == "csv":
+        try:
+            uploaded_file = st.file_uploader("Upload standard file (.csv)", type=["csv"])
+            df = read_csv(uploaded_file).fillna("")
+        except:
+            print('Error catched')
+    elif uploaded_file_category == "json":
+        try:
+            uploaded_file = st.file_uploader("Upload customer standard file (.json)", type=["json"])
+            df = pd.read_json(uploaded_file)
+            df.to_csv('csvfile.csv', encoding='utf-8', index=False)
+        except:
+            print('Error catched')
+    elif uploaded_file_category == "xml":
+        try:
+            uploaded_file = st.file_uploader("Upload customer standard file (.xml)", type=["xml"])
+            df = pd.read_xml(uploaded_file)
+            df.to_csv('csvfile.csv', encoding='utf-8', index=False)
+        except:
+            print('Error catched')
+    else:
+        try:
+            uploaded_file = st.file_uploader("Upload standard file (.csv)", type=["csv"])
+            df = read_csv(uploaded_file).fillna("")
+        except:
+            print('Error catched')
+    # File category - END
+ 
 
     if uploaded_file and customer_name:
         # Read CSV and replace NaN
-        df = read_csv(uploaded_file).fillna("")
+        #df = read_csv(uploaded_file).fillna("")
         st.subheader("📄 Sample of Uploaded File")
         st.dataframe(df.head())
 
@@ -81,63 +117,65 @@ def run_checker_ui():
 
                 if validation_passed:
                     st.success("✅ File passes all validation rules!")
-                    
+                    st.session_state.button_clicked = False
                     # Show Load Data button
-                  #  if st.button("Load Data"):
-                    st.button("Load Data")
+                    if st.button("Load Data") or True:
+                    #st.button("Load Data")
+                        st.session_state.button_clicked = True
+                        # Show Load Data button
                         #st.write("Button was clicked!")
-                    try:
-                            st.write("try block!")
-                            # --- Load JSON payload ---
-                            with open("config/insert_payload_db_ready.json", "r") as f:
-                                payload = json.load(f)
- 
-                                table_name = payload["table"]
-                                rows = payload["rows"]
+                        try:
                                 
-                                # --- Oracle Connection ---
-                                conn = oracledb.connect(
-                                    user="STN_SMAC_DBA",
-                                    password="sidetrade",
-                                    dsn="192.168.31.115:1521/ORCPRV08"
-                                )
-                                cur = conn.cursor()
+                                # --- Load JSON payload ---
+                                with open("config/insert_payload_db_ready.json", "r") as f:
+                                    payload = json.load(f)
+    
+                                    table_name = payload["table"]
+                                    rows = payload["rows"]
+                                    
+                                    # --- Oracle Connection ---
+                                    conn = oracledb.connect(
+                                        user="STN_TEST_DBA",
+                                        password="sidetrade",
+                                        dsn="192.168.31.115:1521/ORCPRV08"
+                                    )
+                                    cur = conn.cursor()
+                                    
+                                    # --- Retrieve valid columns from DB ---
+                                    cur.execute("""
+                                        SELECT COLUMN_NAME
+                                        FROM ALL_TAB_COLUMNS
+                                        WHERE TABLE_NAME = :tbl
+                                    """, {"tbl": table_name.upper()})
+                                    valid_columns = {r[0] for r in cur.fetchall()}
+                                    
+                                    # --- Prepare and execute inserts ---
+                                    for row in rows:
+                                        # Filter only valid DB columns
+                                        cols = [col for col in row.keys() if col.upper() in valid_columns]
+                                        if not cols:
+                                            print(f"Skipping row, no valid columns: {row}")
+                                            continue
+                                    
+                                        placeholders = ", ".join([f":{i+1}" for i in range(len(cols))])
+                                        sql = f"INSERT INTO {table_name} ({', '.join(cols)}) VALUES ({placeholders})"
+                                        values = [row[c] for c in cols]
+                                    
+                                        try:
+                                            cur.execute(sql, values)
+                                            print(f"Inserted: {cols}")
+                                        except Exception as e:
+                                            print(f"Failed to insert row: {e}")
+                                    
+                                    # --- Commit and close ---
+                                    conn.commit()
+                                    cur.close()
+                                    conn.close()
                                 
-                                # --- Retrieve valid columns from DB ---
-                                cur.execute("""
-                                    SELECT COLUMN_NAME
-                                    FROM ALL_TAB_COLUMNS
-                                    WHERE TABLE_NAME = :tbl
-                                """, {"tbl": table_name.upper()})
-                                valid_columns = {r[0] for r in cur.fetchall()}
-                                
-                                # --- Prepare and execute inserts ---
-                                for row in rows:
-                                    # Filter only valid DB columns
-                                    cols = [col for col in row.keys() if col.upper() in valid_columns]
-                                    if not cols:
-                                        print(f"Skipping row, no valid columns: {row}")
-                                        continue
-                                
-                                    placeholders = ", ".join([f":{i+1}" for i in range(len(cols))])
-                                    sql = f"INSERT INTO {table_name} ({', '.join(cols)}) VALUES ({placeholders})"
-                                    values = [row[c] for c in cols]
-                                
-                                    try:
-                                        cur.execute(sql, values)
-                                        print(f"Inserted: {cols}")
-                                    except Exception as e:
-                                        print(f"Failed to insert row: {e}")
-                                
-                                # --- Commit and close ---
-                                conn.commit()
-                                cur.close()
-                                conn.close()
-                            
-                    except Exception as e:
-                            st.error(f"❌ Error loading data: {str(e)}")
-                #else:
-                 #   st.warning("⚠️ File does NOT pass validation rules!")
+                        except Exception as e:
+                                st.error(f"❌ Error loading data: {str(e)}")
+                else:
+                   st.warning("⚠️ File does NOT pass validation rules!")
 
             except Exception as e:
                 st.error(f"❌ Error validating file: {str(e)}")

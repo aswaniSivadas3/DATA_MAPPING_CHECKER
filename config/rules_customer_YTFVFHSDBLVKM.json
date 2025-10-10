@@ -17,7 +17,8 @@
   "FunctionalCustomerCode": {
     "type": "string",
     "mandatory": false,
-    "max_length": 20
+    "max_length": 20,
+    "derived": "MemberCode+'-'+TechnicalCustomerCode"
   },
   "Sellers Entity": {
     "type": "string",
@@ -106,7 +107,7 @@
   },
   "Currency": {
     "type": "string",
-    "mandatory": false,
+    "mandatory": true,
     "max_length": 3
   },
   "Assignment Code 1": {
@@ -201,7 +202,7 @@
   },
   "Local currency code": {
     "type": "string",
-    "mandatory": true,
+    "mandatory": false,
     "max_length": 3
   },
   "Invoices not yet issued amount in local currency": {
